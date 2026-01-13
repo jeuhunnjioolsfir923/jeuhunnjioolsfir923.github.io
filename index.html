@@ -1,92 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VYRT COMMUNITY 💫</title>
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <title>Simple Math Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Logo animation */
-        .logo {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            color: white;
-            animation: shimmer 2s infinite alternate;
-            z-index: 1000;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        @keyframes shimmer {
-            0% { color: #fff; transform: scale(1); }
-            50% { color: #ffdd00; transform: scale(1.1); }
-            100% { color: #fff; transform: scale(1); }
-        }
+    .container {
+      background: #020617;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      text-align: center;
+    }
 
-        /* Glowing title */
-        h1 {
-            margin-top: 80px;
-            font-size: 3rem;
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffdd00, 0 0 30px #ffdd00;
-            animation: glow 2s infinite alternate;
-        }
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
 
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffdd00, 0 0 30px #ffdd00; }
-            50% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffdd00, 0 0 40px #ffdd00; }
-            100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffdd00, 0 0 30px #ffdd00; }
-        }
+    p {
+      color: #cbd5f5;
+    }
 
-        /* Description fade-in */
-        p.description {
-            max-width: 800px;
-            margin: 20px auto 50px auto;
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0;
-            animation: fadeIn 2s forwards 1s;
-        }
+    .question {
+      font-size: 26px;
+      margin: 20px 0;
+    }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+    }
 
-        /* Footer below content */
-        footer {
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
 
-        /* Link style */
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
+    button:hover {
+      background: #1d4ed8;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      min-height: 24px;
+    }
+
+    .correct {
+      color: #22c55e;
+    }
+
+    .wrong {
+      color: #ef4444;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
-    <div class="logo"><i class="fa-light fa-sparkles"></i></div>
 
-    <h1>VYRT COMMUNITY 💫</h1>
-    <p class="description">
-        Hey! Welcome To The Home Page Of VYRT Community! In Here We Got A Lot Of Things For You To Choose! Please Remember That There Is Only One Developer Creating Websites, So Sometimes You Have To Wait Since Every Website Might Take Time To Build Or We May Discontinue or Quit Other Projects We Would Make. We Built A Music, Unblocker ETC.. Websites! You Can Check Them Out After You Do A Quiz! But Maybe We May Work On VYRT Movies Too! It Isnt JUST Piracy. Its Peak Piracy. Please Make Sure To NEVER Share This To Others Or It Would Be Blocked Forever! A Single Developer/Creator Is Keeping Things Up To Become A Successful Creator/Developer. Thank You For Reading The Description! To Begin Accessing The Websites You Should Write Down The Answers In This Forms <a href="https://forms.gle/qmQv89qbcUedygDCA" target="_blank">https://forms.gle/qmQv89qbcUedygDCA</a>.
-    </p>
+  <div class="container">
+    <h1>Math Practice</h1>
+    <p>For students and teachers</p>
 
-    <footer>OWNED AND CREATED BY VYRT</footer>
+    <div class="question" id="question">Loading...</div>
+
+    <input
+      type="number"
+      id="answer"
+      placeholder="Enter your answer"
+      autocomplete="off"
+    >
+
+    <button onclick="checkAnswer()">Check Answer</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="footer">
+      Educational use only
+    </div>
+  </div>
+
+  <script>
+    let num1, num2, operator, correctAnswer;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+
+      const operators = ["+", "-", "×", "÷"];
+      operator = operators[Math.floor(Math.random() * operators.length)];
+
+      if (operator === "+") correctAnswer = num1 + num2;
+      if (operator === "-") correctAnswer = num1 - num2;
+      if (operator === "×") correctAnswer = num1 * num2;
+      if (operator === "÷") {
+        correctAnswer = num1;
+        num1 = num1 * num2;
+      }
+
+      document.getElementById("question").textContent =
+        `${num1} ${operator} ${num2}`;
+      document.getElementById("answer").value = "";
+      document.getElementById("result").textContent = "";
+    }
+
+    function checkAnswer() {
+      const userAnswer = Number(document.getElementById("answer").value);
+      const result = document.getElementById("result");
+
+      if (userAnswer === correctAnswer) {
+        result.textContent = "Correct! 🎉";
+        result.className = "result correct";
+      } else {
+        result.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+        result.className = "result wrong";
+      }
+
+      setTimeout(generateQuestion, 1500);
+    }
+
+    generateQuestion();
+  </script>
+
 </body>
 </html>
