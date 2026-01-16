@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/active/go/',
-    bare:'https://late-mountain-49c0.baktashanwari234.workers.dev/',
+    bare:'well this is bad..',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/active/uv/uv.handler.js',
